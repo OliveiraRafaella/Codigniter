@@ -58,7 +58,7 @@ class Main extends Controller //BaseController
         
     }
 
-    public function index(){
+    public function index14(){
         $clientes = [
             [
                 'nome' => 'Joao',
@@ -81,4 +81,8 @@ class Main extends Controller //BaseController
         echo view('pagina',['clientes' => $clientes ]);
     }
 
+    public function index(){
+        //echo view('layouts/default');
+        echo view('pagina1');
+    }
 } 
