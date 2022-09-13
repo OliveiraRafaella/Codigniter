@@ -10,11 +10,16 @@
 </head>
 <body>
     
- 
-    <?= $this->renderSection('seccao1')  ?>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4 text-center p-4 bg-light">
+                <?= $this->renderSection('seccao1')  ?>
+            </div>
+        </div>
+    </div>
 
+    
     <hr>
- 
     <?= $this->renderSection('seccao2')  ?>
 
 </body>

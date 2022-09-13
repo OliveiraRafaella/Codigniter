@@ -81,8 +81,14 @@ class Main extends Controller //BaseController
         echo view('pagina',['clientes' => $clientes ]);
     }
 
-    public function index(){
+    public function index15(){
         //echo view('layouts/default');
         echo view('pagina1');
     }
+    public function index(){
+        //echo view('layouts/default');
+        echo view('pagina3');
+    }
+/* 
+    video 16 minuto 11:31 */
 } 
