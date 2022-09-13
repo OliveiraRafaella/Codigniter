@@ -1,0 +1,53 @@
+<!-- index12
+<p>Pagina 2</p>
+
+<p><?= $nome ?></p>
+
+<p><?= $apelido ?></p> -->
+
+<!--index13
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     apresentação dos dados -->
+        <?php print_r($marcas) ?> <!-- //mostra dados que esta no parametro -->
+        <?php echo $marcas[2] ?>
+        <?= $marcas[0] ?>
+    <!-- ciclo foreach -->
+    <ul> <!-- modo sujo -->
+        <?php foreach ($marcas as $marca ) {
+            echo "<li>$marca</li>";
+        } ?>
+    </ul>
+    <ul> <!-- modo mais limpo -->
+        <?php foreach($marcas as $marca):?>
+            <li><?= $marca ?></li>
+        <?php endforeach;?>
+        
+    </ul>
+    <!-- ciclo for -->
+    <ul>
+        <?php for($i=0; $i<count($marcas); $i++): ?>
+                <li><?= $marcas[$i] ?></li>
+        <?php endfor;?>
+    </ul>
+    <!-- condição if -->
+    <?php ?>
+    <ul>
+        <?php for($i=0; $i<count($marcas); $i++): ?>
+            
+            <?php if($marcas[$i] == 'Ferrari'):?>
+                <li><?= $marcas[$i] ?></li>
+            <?php endif;?>
+
+        <?php endfor;?>
+    </ul>
+    <?php ?>
+</body>
+</html>-->
