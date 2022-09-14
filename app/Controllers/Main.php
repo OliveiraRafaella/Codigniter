@@ -154,7 +154,7 @@ class Main extends Controller //BaseController
     }
     
             public function index (){
-
+                echo view('pagina21');
             }
 
 /* 
