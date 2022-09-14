@@ -54,7 +54,7 @@ class Main extends Controller //BaseController
             'Maclaren'
         ];
 
-        echo view('pagina',['marcas' => $marcas ]);
+        echo view('pagina13',['marcas' => $marcas ]);
         
     }
 
@@ -83,11 +83,11 @@ class Main extends Controller //BaseController
 
     public function index15(){
         //echo view('layouts/default');
-        echo view('pagina1');
+        echo view('pagina15');
     }
     public function index16(){
         //echo view('layouts/default');
-        echo view('pagina3');
+        echo view('pagina16');
     }
     public function index17(){
         //Usar o render torna a redenrização da pagina mais rapida, do que somente utilizar o view
@@ -100,7 +100,7 @@ class Main extends Controller //BaseController
         //definicção de variavel
         //$var->setVar('nome', 'Rafaella Cristina')->setVar('apelido','Oliveira');
         $var->setData($dados); //represntar dados como array
-        echo $var->render('pagina3');
+        echo $var->render('pagina16');
         //echo $var->setData($dados)->echo $var->render('pagina3'); //outra forma de mostrar os dados
     }
 
@@ -112,10 +112,26 @@ class Main extends Controller //BaseController
             'titulo' => 'Frase'
         ]);
 
-        echo $p->render('pagina4');
+        echo $p->render('pagina18');
     }
     
-    public function index(){
+    public function index19(){
+
+        $p = \Config\Services::parser();
+        $p->setData([
+            'titulo' => 'Testes com view parser',
+            'nomes'=> [
+                ['nome' =>'Rafaella'],
+                ['nome' =>'Ana'],
+                ['nome' =>'Mateus'],
+            ],
+            'admin' => false
+        ]);
+
+        echo $p->render('pagina19');        
+    }
+
+    public function index (){
         
     }
 /* 
