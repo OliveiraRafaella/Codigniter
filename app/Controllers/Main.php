@@ -131,9 +131,32 @@ class Main extends Controller //BaseController
         echo $p->render('pagina19');        
     }
 
-    public function index (){
+    public function index20 (){
         
+        $tabela = new \CodeIgniter\View\Table();
+
+        $template = [
+            'table_open' => '<table class = "table table-striped">',
+        
+            'thead_open'  => '<thead class="thead-dark">',
+        ];
+        
+        $tabela->setTemplate($template);
+
+        $data = [
+            ['Name', 'Color', 'Size'],
+            ['Fred', 'Blue',  'Small'],
+            ['Mary', 'Red',   'Large'],
+            ['John', 'Green', 'Medium'],
+        ];
+
+        echo view('pagina20',['tabela' => $tabela->generate($data)]);
     }
+    
+            public function index (){
+
+            }
+
 /* 
     video 16 minuto 11:31 */
 } 
