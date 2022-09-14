@@ -104,8 +104,19 @@ class Main extends Controller //BaseController
         //echo $var->setData($dados)->echo $var->render('pagina3'); //outra forma de mostrar os dados
     }
 
-    public function index(){
+    public function index18(){
+        //view parser
+        $p = \Config\Services::parser();
+        $p->setData([
+            'frase' => 'Esta frase é do parser.',
+            'titulo' => 'Frase'
+        ]);
 
+        echo $p->render('pagina4');
+    }
+    
+    public function index(){
+        
     }
 /* 
     video 16 minuto 11:31 */
