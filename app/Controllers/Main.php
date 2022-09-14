@@ -153,9 +153,18 @@ class Main extends Controller //BaseController
         echo view('pagina20',['tabela' => $tabela->generate($data)]);
     }
     
-            public function index (){
-                echo view('pagina21');
-            }
+    public function index22 (){
+    
+        echo view('pagina21');
+    }
+
+    public function index (){
+        echo view('home');
+    }
+
+    public function index23s(){
+        echo view('servicos');
+    }
 
 /* 
     video 16 minuto 11:31 */
