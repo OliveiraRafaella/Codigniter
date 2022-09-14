@@ -85,9 +85,27 @@ class Main extends Controller //BaseController
         //echo view('layouts/default');
         echo view('pagina1');
     }
-    public function index(){
+    public function index16(){
         //echo view('layouts/default');
         echo view('pagina3');
+    }
+    public function index17(){
+        //Usar o render torna a redenrização da pagina mais rapida, do que somente utilizar o view
+        $dados = [
+            'nome' => 'Ana',
+            'apelido' => 'Beatriz'
+        ];
+
+        $var = \Config\Services::renderer();
+        //definicção de variavel
+        //$var->setVar('nome', 'Rafaella Cristina')->setVar('apelido','Oliveira');
+        $var->setData($dados); //represntar dados como array
+        echo $var->render('pagina3');
+        //echo $var->setData($dados)->echo $var->render('pagina3'); //outra forma de mostrar os dados
+    }
+
+    public function index(){
+
     }
 /* 
     video 16 minuto 11:31 */

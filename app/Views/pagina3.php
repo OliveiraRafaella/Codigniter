@@ -9,5 +9,6 @@
 <body>
     <p>Conteudo pagina 3</p>
     <?= $this->include('inc1')?>
+    <?= $nome . ' ' . $apelido?>  <!--aula 17-->  
 </body>
 </html>
