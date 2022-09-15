@@ -235,4 +235,35 @@ class Main extends Controller //BaseController
         print_r(session()->get());
     }
 
+    public function index26(){
+        
+        echo 'index';
+        $this->printSession();
+    }
+
+    public function login(){
+        session()->set([
+            'usuario'=> 'ana',
+            'email'=> 'ana@gmail.com'
+        ]);
+
+        echo 'login';
+        $this->printSession();
+    }
+
+    public function usuario()
+    {
+        if(session()->has('usuario')){
+            echo 'Existe usuario logado';
+        } else {
+            echo 'Não existe usuario logado';
+        }
+    }
+
+    public function logout(){
+
+        //session()->destroy();//destroi os dados da sessao mas mantem o cookie
+        session()->stop();//destroi a sessao e destroi os cookie e  cria um novo 
+        return redirect()->to(site_url('public/main/index26'));
+    }
 } 
