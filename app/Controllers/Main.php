@@ -198,5 +198,41 @@ class Main extends Controller //BaseController
         echo 'Usuario: ' . session()->get('usuario') . '<br>' . 'Email: ' . session()->get('email');
     }
 
+    public function index25(){
+        
+        session()->set('usuario','ana'); //set adiciona dados
+
+        $dados = [
+            'nome' => 'Joao',
+            'email' => 'j@gmail.com',
+            'facebook'=> 'sdsdsdsds'
+        ];
+
+        //echo session()->get('usuario');
+        session()->set($dados);
+        
+        echo session()->nome;
+
+        
+        session()->remove('usuario'); //remove o campo
+
+        //pesquisa se o campo existe
+        if (session()->has('usuario')){
+            echo 'sim';
+        }else{
+            echo 'não';
+        }
+
+        $this->printSession();
+    }
+
+    public function mostrar(){
+        //return view();
+    }
+
+    private function printSession(){
+        echo '<pre>';
+        print_r(session()->get());
+    }
 
 } 
