@@ -9,6 +9,12 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class Main extends Controller //BaseController
 {
+    /*Construtor da sessao
+    private $ses = null;
+    public function __construct()
+    {
+        $this->ses = \Config\Services::session();
+    }*/
     public function index11(){
        echo 'inicio';
 
@@ -125,7 +131,7 @@ class Main extends Controller //BaseController
                 ['nome' =>'Ana'],
                 ['nome' =>'Mateus'],
             ],
-            'admin' => false
+            'admin' => false,
         ]);
 
         echo $p->render('pagina19');        
@@ -174,4 +180,23 @@ class Main extends Controller //BaseController
     public function redirecionado(){
         echo view('inc1');
     }
+
+    public function index24(){
+        
+       // $ses = \Config\Services::session();
+       //$this->ses->set('usuario','rafa');
+
+       session()->set('email','rafa@gmail.com');
+
+       echo '<pre>';
+       print_r(session()->get());
+    }
+
+    public function teste()
+    {
+        //echo $this->ses->get('usuario');
+        echo 'Usuario: ' . session()->get('usuario') . '<br>' . 'Email: ' . session()->get('email');
+    }
+
+
 } 
