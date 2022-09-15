@@ -158,14 +158,20 @@ class Main extends Controller //BaseController
         echo view('pagina21');
     }
 
-    public function index (){
+    public function index23 (){
         echo view('home');
     }
 
-    public function index23s(){
+    public function index23_1(){
+        
+        $a = true;
+        if($a){
+            return redirect()->to(site_url("public/main/redirecionado"));
+        }
         echo view('servicos');
     }
 
-/* 
-    video 16 minuto 11:31 */
+    public function redirecionado(){
+        echo view('inc1');
+    }
 } 
