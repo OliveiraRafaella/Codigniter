@@ -266,4 +266,14 @@ class Main extends Controller //BaseController
         session()->stop();//destroi a sessao e destroi os cookie e  cria um novo 
         return redirect()->to(site_url('public/main/index26'));
     }
+
+    public function index27(){
+
+        $db = \Config\Database::connect();
+        $resultados = $db->query("SELECT * FROM clientes")->getResultObject();
+        $db->close();
+
+        echo '<pre>';
+        print_r($resultados);
+    }
 } 
