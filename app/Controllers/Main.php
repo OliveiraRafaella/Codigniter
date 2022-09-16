@@ -6,6 +6,7 @@ use CodeIgniter\HTTP\Request;
 use CodeIgniter\Controller;
 use App\Libraries\Loja\Vendas;
 use JetBrains\PhpStorm\ArrayShape;
+use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 
 class Main extends Controller //BaseController
 {
@@ -311,5 +312,34 @@ class Main extends Controller //BaseController
         echo '<pre>';
         print_r($dados);
 
+    }
+
+    public function index30(){
+        
+        return view('formulario');
+    }
+
+    public function novocliente(){
+        
+        $nome = $this->request->getPost('nome');
+        $email = $this->request->getPost('email');
+        
+        $params = [
+            'nome' => $nome,
+            'email' => $email
+        ];
+
+        $db = db_connect();
+        $db->query("
+            INSERT INTO clientes
+            VALUES(
+                0,
+                :nome:,
+                :email:
+            )
+        ", $params);
+        $db->close();
+
+        echo 'terminado';
     }
 } 
