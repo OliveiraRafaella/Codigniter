@@ -270,10 +270,46 @@ class Main extends Controller //BaseController
     public function index27(){
 
         $db = \Config\Database::connect();
-        $resultados = $db->query("SELECT * FROM clientes")->getResultObject();
+        $resultados = $db->query("SELECT * FROM clientes"); //->getResultObject();
+        $db->close();
+
+        /*echo '<pre>';
+        print_r($resultados);*/
+        
+        foreach($resultados->getResult() as $row){ //forma de representar dados do banco
+            echo '<p>' .$row->nome. '<p>';
+        }
+
+    }
+
+    public function index29($id){
+       /* $params =[
+            $id
+        ];
+
+        $db = db_connect();
+        $dados = $db->query("SELECT * FROM clientes WHERE idclientes = ?",$params)->getResultObject();
         $db->close();
 
         echo '<pre>';
-        print_r($resultados);
+        print_r($dados);*/
+
+        //Array associativo
+
+        $params =[
+            'idcliente' =>$id
+        ];
+
+        $db = db_connect();
+        $dados = $db->query("
+            SELECT * 
+            FROM clientes 
+            WHERE idclientes = :idcliente:
+            ",$params)->getResultObject();
+        $db->close();
+
+        echo '<pre>';
+        print_r($dados);
+
     }
 } 
