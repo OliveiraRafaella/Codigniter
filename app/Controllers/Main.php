@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\Controller;
 use App\Libraries\Loja\Vendas;
+use CodeIgniter\View\ViewDecoratorInterface;
 use JetBrains\PhpStorm\ArrayShape;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 
@@ -16,21 +17,22 @@ class Main extends Controller //BaseController
     {
         $this->ses = \Config\Services::session();
     }*/
-    public function index11(){
-       echo 'inicio';
+    public function index11()
+    {
+        echo 'inicio';
 
-       $v = new Vendas();
-       $v->produto = "Automovel";
-       $v->preco= 10000.01;
+        $v = new Vendas();
+        $v->produto = "Automovel";
+        $v->preco = 10000.01;
 
-       echo '<br>';
-       echo $v->info();
-       echo '<br>';
-       echo $v->hash();
-
+        echo '<br>';
+        echo $v->info();
+        echo '<br>';
+        echo $v->hash();
     }
 
-    public function index12(){
+    public function index12()
+    {
         /*view dentro e fora da pasta*/
         echo view('Loja\pagina');
         echo view('p1');
@@ -40,8 +42,8 @@ class Main extends Controller //BaseController
             'nome' => 'Joao',
             'apelido' => 'Ribeiro'
         ];
-        
-        echo view('pagina',$variaveis);
+
+        echo view('pagina', $variaveis);
         //echo view ('pagina',['nome'=>'Joao']); outro modo de fazer array
 
         //dados na cache
@@ -50,10 +52,11 @@ class Main extends Controller //BaseController
             'apelido' => 'Ribeiro'
         );
 
-        echo view('pagina',$dados,['cache'=>60]);
-     }
+        echo view('pagina', $dados, ['cache' => 60]);
+    }
 
-    public function index13(){
+    public function index13()
+    {
         $marcas = [
             'Audi',
             'Mercedes',
@@ -61,11 +64,11 @@ class Main extends Controller //BaseController
             'Maclaren'
         ];
 
-        echo view('pagina13',['marcas' => $marcas ]);
-        
+        echo view('pagina13', ['marcas' => $marcas]);
     }
 
-    public function index14(){
+    public function index14()
+    {
         $clientes = [
             [
                 'nome' => 'Joao',
@@ -85,18 +88,21 @@ class Main extends Controller //BaseController
             ],
         ];
 
-        echo view('pagina',['clientes' => $clientes ]);
+        echo view('pagina', ['clientes' => $clientes]);
     }
 
-    public function index15(){
+    public function index15()
+    {
         //echo view('layouts/default');
         echo view('pagina15');
     }
-    public function index16(){
+    public function index16()
+    {
         //echo view('layouts/default');
         echo view('pagina16');
     }
-    public function index17(){
+    public function index17()
+    {
         //Usar o render torna a redenrização da pagina mais rapida, do que somente utilizar o view
         $dados = [
             'nome' => 'Ana',
@@ -111,7 +117,8 @@ class Main extends Controller //BaseController
         //echo $var->setData($dados)->echo $var->render('pagina3'); //outra forma de mostrar os dados
     }
 
-    public function index18(){
+    public function index18()
+    {
         //view parser
         $p = \Config\Services::parser();
         $p->setData([
@@ -121,33 +128,35 @@ class Main extends Controller //BaseController
 
         echo $p->render('pagina18');
     }
-    
-    public function index19(){
+
+    public function index19()
+    {
 
         $p = \Config\Services::parser();
         $p->setData([
             'titulo' => 'Testes com view parser',
-            'nomes'=> [
-                ['nome' =>'Rafaella'],
-                ['nome' =>'Ana'],
-                ['nome' =>'Mateus'],
+            'nomes' => [
+                ['nome' => 'Rafaella'],
+                ['nome' => 'Ana'],
+                ['nome' => 'Mateus'],
             ],
             'admin' => false,
         ]);
 
-        echo $p->render('pagina19');        
+        echo $p->render('pagina19');
     }
 
-    public function index20 (){
-        
+    public function index20()
+    {
+
         $tabela = new \CodeIgniter\View\Table();
 
         $template = [
             'table_open' => '<table class = "table table-striped">',
-        
+
             'thead_open'  => '<thead class="thead-dark">',
         ];
-        
+
         $tabela->setTemplate($template);
 
         $data = [
@@ -157,40 +166,45 @@ class Main extends Controller //BaseController
             ['John', 'Green', 'Medium'],
         ];
 
-        echo view('pagina20',['tabela' => $tabela->generate($data)]);
+        echo view('pagina20', ['tabela' => $tabela->generate($data)]);
     }
-    
-    public function index22 (){
-    
+
+    public function index22()
+    {
+
         echo view('pagina21');
     }
 
-    public function index23 (){
+    public function index23()
+    {
         echo view('home');
     }
 
-    public function index23_1(){
-        
+    public function index23_1()
+    {
+
         $a = true;
-        if($a){
+        if ($a) {
             return redirect()->to(site_url("public/main/redirecionado"));
         }
         echo view('servicos');
     }
 
-    public function redirecionado(){
+    public function redirecionado()
+    {
         echo view('inc1');
     }
 
-    public function index24(){
-        
-       // $ses = \Config\Services::session();
-       //$this->ses->set('usuario','rafa');
+    public function index24()
+    {
 
-       session()->set('email','rafa@gmail.com');
+        // $ses = \Config\Services::session();
+        //$this->ses->set('usuario','rafa');
 
-       echo '<pre>';
-       print_r(session()->get());
+        session()->set('email', 'rafa@gmail.com');
+
+        echo '<pre>';
+        print_r(session()->get());
     }
 
     public function teste()
@@ -199,53 +213,58 @@ class Main extends Controller //BaseController
         echo 'Usuario: ' . session()->get('usuario') . '<br>' . 'Email: ' . session()->get('email');
     }
 
-    public function index25(){
-        
-        session()->set('usuario','ana'); //set adiciona dados
+    public function index25()
+    {
+
+        session()->set('usuario', 'ana'); //set adiciona dados
 
         $dados = [
             'nome' => 'Joao',
             'email' => 'j@gmail.com',
-            'facebook'=> 'sdsdsdsds'
+            'facebook' => 'sdsdsdsds'
         ];
 
         //echo session()->get('usuario');
         session()->set($dados);
-        
+
         echo session()->nome;
 
-        
+
         session()->remove('usuario'); //remove o campo
 
         //pesquisa se o campo existe
-        if (session()->has('usuario')){
+        if (session()->has('usuario')) {
             echo 'sim';
-        }else{
+        } else {
             echo 'não';
         }
 
         $this->printSession();
     }
 
-    public function mostrar(){
+    public function mostrar()
+    {
         //return view();
     }
 
-    private function printSession(){
+    private function printSession()
+    {
         echo '<pre>';
         print_r(session()->get());
     }
 
-    public function index26(){
-        
+    public function index26()
+    {
+
         echo 'index';
         $this->printSession();
     }
 
-    public function login(){
+    public function login()
+    {
         session()->set([
-            'usuario'=> 'ana',
-            'email'=> 'ana@gmail.com'
+            'usuario' => 'ana',
+            'email' => 'ana@gmail.com'
         ]);
 
         echo 'login';
@@ -254,21 +273,23 @@ class Main extends Controller //BaseController
 
     public function usuario()
     {
-        if(session()->has('usuario')){
+        if (session()->has('usuario')) {
             echo 'Existe usuario logado';
         } else {
             echo 'Não existe usuario logado';
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
 
         //session()->destroy();//destroi os dados da sessao mas mantem o cookie
-        session()->stop();//destroi a sessao e destroi os cookie e  cria um novo 
+        session()->stop(); //destroi a sessao e destroi os cookie e  cria um novo 
         return redirect()->to(site_url('public/main/index26'));
     }
 
-    public function index27(){
+    public function index27()
+    {
 
         $db = \Config\Database::connect();
         $resultados = $db->query("SELECT * FROM clientes"); //->getResultObject();
@@ -276,15 +297,15 @@ class Main extends Controller //BaseController
 
         /*echo '<pre>';
         print_r($resultados);*/
-        
-        foreach($resultados->getResult() as $row){ //forma de representar dados do banco
-            echo '<p>' .$row->nome. '<p>';
-        }
 
+        foreach ($resultados->getResult() as $row) { //forma de representar dados do banco
+            echo '<p>' . $row->nome . '<p>';
+        }
     }
 
-    public function index29($id){
-       /* $params =[
+    public function index29($id)
+    {
+        /* $params =[
             $id
         ];
 
@@ -297,8 +318,8 @@ class Main extends Controller //BaseController
 
         //Array associativo
 
-        $params =[
-            'idcliente' =>$id
+        $params = [
+            'idcliente' => $id
         ];
 
         $db = db_connect();
@@ -306,24 +327,25 @@ class Main extends Controller //BaseController
             SELECT * 
             FROM clientes 
             WHERE idclientes = :idcliente:
-            ",$params)->getResultObject();
+            ", $params)->getResultObject();
         $db->close();
 
         echo '<pre>';
         print_r($dados);
-
     }
 
-    public function index30(){
-        
+    public function index30()
+    {
+
         return view('formulario');
     }
 
-    public function novocliente(){
-        
+    public function novocliente()
+    {
+
         $nome = $this->request->getPost('nome');
         $email = $this->request->getPost('email');
-        
+
         $params = [
             'nome' => $nome,
             'email' => $email
@@ -342,4 +364,60 @@ class Main extends Controller //BaseController
 
         echo 'terminado';
     }
-} 
+
+    public function index42()
+    {
+        helper('form');
+        return view('formulario42');
+    }
+
+    public function submeter()
+    {
+        //verificar se houve a submissão de formulario
+        if ($this->request->getMethod() !== 'post') {
+            return redirect()->to(site_url('public/main/index42'));
+        }
+
+        //validação
+        $validacao = $this->validate([
+            'usuario' => 'required',
+            'senha' => 'required'
+        ]);
+
+        if (!$validacao) {
+            echo 'erro';
+        } else {
+            echo 'sucesso';
+        }
+    }
+
+    public function index43()
+    {
+        $data = [];
+        if (session()->has('erro')) {
+            $data['erro']=session('erro');
+        }
+        return view('formulario43',$data);
+    }
+
+    public function submeter43()
+    {
+        #verificar se houve submissão
+        if ($this->request->getMethod() !== 'post') {
+            return redirect()->to(site_url('public/main/index43'));
+        }
+
+        $val = $this->validate([
+            'nome' => 'required',
+            'apelido' => 'required'
+        ]);
+
+        if(!$val){
+            //erro validação
+            return redirect()->to(site_url('public/main/index43'))->withInput()->with('erro',$this->validator);//->back()->withInput();
+        }
+        else{
+            echo 'Formulario ok';
+        }
+    }
+}
