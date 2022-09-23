@@ -428,4 +428,37 @@ class Main extends Controller //BaseController
             echo 'Formulario ok';
         }
     }
+
+    public function index45()
+    {
+        $db = db_connect();
+        $resultados = $db->query("SELECT * FROM loja_online")->getResultObject();
+        $db->close();
+
+        echo 'Cliente: '. count($resultados);
+    }
+
+    public function index46()
+    {
+        $db = db_connect();
+        $dados = $db -> query("SELECT * FROM loja_online");
+        $db -> close();
+
+        $cliente = $dados->getRow(); //busca primeiro registro
+        echo $cliente->nome;
+        
+        //transformar dados em objetos
+       /*  foreach($dados->getResult() as $cliente){
+            echo $cliente -> nome . "<br>";
+            echo $cliente -> email . "<br>";
+            echo '<hr>';
+        }*/
+
+        //array
+        /*foreach($dados->getResultArray() as $cliente){
+            echo $cliente['nome']. "<br>";
+            echo $cliente['email'] . "<br>";
+            echo '<hr>';
+        }*/
+    }
 }
