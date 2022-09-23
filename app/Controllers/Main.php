@@ -408,8 +408,16 @@ class Main extends Controller //BaseController
         }
 
         $val = $this->validate([
-            'nome' => 'required',
+            'nome' => 'required|alpha',
             'apelido' => 'required'
+        ],[ //mensagem personalizada
+            'nome' => [
+                'required' => 'Nome é campo de preenchimento obrigatório',
+                'alpha' => 'Só pode conter letras'
+            ],
+            'apelido' => [
+                'required' => 'Apelido é campo de preenchimento obrigatório'
+            ]
         ]);
 
         if(!$val){
