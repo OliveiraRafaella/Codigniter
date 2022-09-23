@@ -446,7 +446,7 @@ class Main extends Controller //BaseController
 
         $cliente = $dados->getRow(); //busca primeiro registro
         echo $cliente->nome;
-        
+
         //transformar dados em objetos
        /*  foreach($dados->getResult() as $cliente){
             echo $cliente -> nome . "<br>";
@@ -460,5 +460,23 @@ class Main extends Controller //BaseController
             echo $cliente['email'] . "<br>";
             echo '<hr>';
         }*/
+
+        /* mostrar primeiro ultimo e seguinte dado
+        $primeiro = $dados->getFirstRow();
+        $seguinte = $dados->getNextRow();
+        $ultimo = $dados->getLastRow();
+
+        echo $primeiro-> nome ."<br>" ;
+        echo $ultimo -> nome ."<br>";
+        echo $seguinte -> nome; */
+    }
+
+    public function index47()
+    {
+        $db = db_connect();
+        $dados = $db->query("select * from loja_online");
+        $db -> close();
+
+        
     }
 }
