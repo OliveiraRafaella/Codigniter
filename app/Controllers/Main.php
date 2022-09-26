@@ -432,7 +432,7 @@ class Main extends Controller //BaseController
     public function index45()
     {
         $db = db_connect();
-        $resultados = $db->query("SELECT * FROM loja_online")->getResultObject();
+        $resultados = $db->query("SELECT * FROM loja")->getResultObject();
         $db->close();
 
         echo 'Cliente: '. count($resultados);
@@ -441,7 +441,7 @@ class Main extends Controller //BaseController
     public function index46()
     {
         $db = db_connect();
-        $dados = $db -> query("SELECT * FROM loja_online");
+        $dados = $db -> query("SELECT * FROM loja");
         $db -> close();
 
         $cliente = $dados->getRow(); //busca primeiro registro
@@ -474,9 +474,13 @@ class Main extends Controller //BaseController
     public function index47()
     {
         $db = db_connect();
-        $dados = $db->query("select * from loja_online");
+        $dados = $db->query("SELECT * FROM loja");
         $db -> close();
 
-        
+        //$cliente = $dados->getResultObject()[0]; //dados do primeiro cliente
+        $cliente = $dados->getCustomResultObject('Cliente')[0];
+
+        echo $cliente->nome;
+        //echo $cliente->nome_completo;
     }
 }
