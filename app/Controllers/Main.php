@@ -523,4 +523,46 @@ class Main extends Controller //BaseController
         //echo $cliente->nome;
         //echo $cliente->nome_completo;
     }
+
+    public function index49()
+    {
+        $db = db_connect();
+
+        $tb_loja = $db->table('loja');
+        //$resultados = $tb_loja->get()->getCustomResultObject('Cliente'); //problema no Custom
+        $resultados = $tb_loja->get()->getResultObject();
+
+        $this->printArray($resultados);
+
+        //SELECT * FROM loja
+
+        $db->close();
+    }
+
+    public function printArray($d)
+    {
+        if(is_array($d)){
+            echo '<pre>';
+            print_r($d);
+        }else {
+            echo $d;
+        }
+    }
+
+    public function index50()
+    {
+        $db = db_connect();
+
+        $tb_loja = $db->table('loja');
+        $resultados = $tb_loja->getWhere(['idcliente' => 5])->getResultObject();
+
+        /*foreach ($resultados->getResult() as $cliente) {
+            echo $cliente->nome . '<br>';            
+        }*/
+
+        $this->printArray($resultados);
+
+        $db->close();
+    }
+
 }
