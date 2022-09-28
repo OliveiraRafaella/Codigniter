@@ -5,9 +5,11 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\Controller;
 use App\Libraries\Loja\Vendas;
+
 use CodeIgniter\View\ViewDecoratorInterface;
 use JetBrains\PhpStorm\ArrayShape;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
+use App\Libraries\Cliente;
 
 class Main extends Controller //BaseController
 {
@@ -395,9 +397,9 @@ class Main extends Controller //BaseController
     {
         $data = [];
         if (session()->has('erro')) {
-            $data['erro']=session('erro');
+            $data['erro'] = session('erro');
         }
-        return view('formulario43',$data);
+        return view('formulario43', $data);
     }
 
     public function submeter43()
@@ -410,7 +412,7 @@ class Main extends Controller //BaseController
         $val = $this->validate([
             'nome' => 'required|alpha',
             'apelido' => 'required'
-        ],[ //mensagem personalizada
+        ], [ //mensagem personalizada
             'nome' => [
                 'required' => 'Nome é campo de preenchimento obrigatório',
                 'alpha' => 'Só pode conter letras'
@@ -420,11 +422,10 @@ class Main extends Controller //BaseController
             ]
         ]);
 
-        if(!$val){
+        if (!$val) {
             //erro validação
-            return redirect()->to(site_url('public/main/index43'))->withInput()->with('erro',$this->validator);//->back()->withInput();
-        }
-        else{
+            return redirect()->to(site_url('public/main/index43'))->withInput()->with('erro', $this->validator); //->back()->withInput();
+        } else {
             echo 'Formulario ok';
         }
     }
@@ -435,20 +436,20 @@ class Main extends Controller //BaseController
         $resultados = $db->query("SELECT * FROM loja")->getResultObject();
         $db->close();
 
-        echo 'Cliente: '. count($resultados);
+        echo 'Cliente: ' . count($resultados);
     }
 
     public function index46()
     {
         $db = db_connect();
-        $dados = $db -> query("SELECT * FROM loja");
-        $db -> close();
+        $dados = $db->query("SELECT * FROM loja");
+        $db->close();
 
         $cliente = $dados->getRow(); //busca primeiro registro
         echo $cliente->nome;
 
         //transformar dados em objetos
-       /*  foreach($dados->getResult() as $cliente){
+        /*  foreach($dados->getResult() as $cliente){
             echo $cliente -> nome . "<br>";
             echo $cliente -> email . "<br>";
             echo '<hr>';
@@ -473,7 +474,7 @@ class Main extends Controller //BaseController
 
     public function index47()
     {
-        $db = db_connect();
+        /*  $db = db_connect();
         $dados = $db->query("SELECT * FROM loja");
         $db -> close();
 
@@ -481,6 +482,45 @@ class Main extends Controller //BaseController
         $cliente = $dados->getCustomResultObject('Cliente')[0];
 
         echo $cliente->nome;
+        //echo $cliente->nome_completo; 
+ */ 
+        $db = db_connect();
+        $tabela = $db->table('loja');
+        $dados = $tabela->getCustomResultObject(2,'Cliente');
+
+        var_dump($dados);
+        exit();
+
+
+        foreach ($dados as $lojas) {
+            echo $lojas->nome  . '</br>';
+        }
+
+        $db->close();
+        //echo $dados->nome;
+    }
+
+    public function index48()
+    {
+        $db = db_connect();
+        $dados = $db->query("SELECT * FROM loja"); //->getResultObject();
+        $db->close();
+
+       /*  echo '<pre>';
+        print_r($dados->getFieldNames());//mostra as colunas da tabela retorna array */
+
+        echo $db->table('loja')->countAll(); //conta quantos registros possui na tabela
+        /*outro modo de fazer*/
+        //echo count($dados);
+        
+        /************ ERRO******************* */
+        //$obj = new Cliente();
+        //$obj -> nome_completo;
+
+        //$cliente = $dados->getResultObject()[0]; //dados do primeiro cliente
+        //$cliente = $dados->getCustomRowObject(2,'app\Libraaries\Cliente.php');
+
+        //echo $cliente->nome;
         //echo $cliente->nome_completo;
     }
 }
