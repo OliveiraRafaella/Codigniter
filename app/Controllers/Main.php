@@ -607,11 +607,26 @@ class Main extends Controller //BaseController
         ];
         /*$db->table('loja')->insert($dados);*/ //insere apenas 1 registro
         
-        $db->table('loja')->insertBatch($dados); //insere apenas 1 registro
+        $db->table('loja')->insertBatch($dados); //insere apenas + de 1 registro
 
         $db->close();
     }
 
+    public function index54()
+    {
+        $db = db_connect();
+
+        $dados = [
+            'nome' => 'NOME2',
+            'apelido' => 'APELIDO2',
+            'email' => 'EMAIL2@EMAIL.COM',
+            'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+        ];
+
+        $db->table('loja')->where('idcliente',8)->update($dados); //UPDATE
+        $db->table('loja')->where('idcliente',8)->delete(); //DELETE
+        $db->close();
+    }
 
 
 }
