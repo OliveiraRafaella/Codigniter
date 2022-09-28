@@ -10,6 +10,7 @@ use CodeIgniter\View\ViewDecoratorInterface;
 use JetBrains\PhpStorm\ArrayShape;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 use App\Libraries\Cliente;
+use DateTime;
 
 class Main extends Controller //BaseController
 {
@@ -564,5 +565,53 @@ class Main extends Controller //BaseController
 
         $db->close();
     }
+
+    public function index51()
+    {
+        $db = db_connect();
+        $tb_loja = $db->table('loja');
+        $tb_loja->selectAvg('data_nascimento');
+        $resultados = $tb_loja->get()->getResultObject();
+
+        /*foreach ($resultados->getResult() as $cliente) {
+            echo $cliente->nome . '<br>';            
+        }*/
+
+        $this->printArray($resultados);
+
+        $db->close();
+    }
+
+    public function index52()
+    {
+        $db = db_connect();
+        $dados = [
+            [
+                'nome' => 'nome2',
+                'apelido' => 'apelido2',
+                'email' => 'email2@email.com',
+                'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+            ],
+            [
+                'nome' => 'nome3',
+                'apelido' => 'apelido3',
+                'email' => 'email3@email.com',
+                'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+            ],
+            [
+                'nome' => 'nome4',
+                'apelido' => 'apelido4',
+                'email' => 'email4@email.com',
+                'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+            ]
+        ];
+        /*$db->table('loja')->insert($dados);*/ //insere apenas 1 registro
+        
+        $db->table('loja')->insertBatch($dados); //insere apenas 1 registro
+
+        $db->close();
+    }
+
+
 
 }
