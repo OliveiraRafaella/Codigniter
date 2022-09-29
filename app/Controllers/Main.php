@@ -11,6 +11,7 @@ use JetBrains\PhpStorm\ArrayShape;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 use App\Libraries\Cliente;
 use DateTime;
+use App\Models\Clientes;
 
 class Main extends Controller //BaseController
 {
@@ -540,9 +541,12 @@ class Main extends Controller //BaseController
         $db->close();
     }
 
-    public function printArray($d)
+    private function printArray($d)
     {
         if(is_array($d)){
+            echo '<pre>';
+            print_r($d);
+        }else if (is_object($d)){
             echo '<pre>';
             print_r($d);
         }else {
@@ -628,5 +632,153 @@ class Main extends Controller //BaseController
         $db->close();
     }
 
+    public function index55()
+    {
+        $db = db_connect();
 
+        $db->transStart();
+        
+        $dados = [//sem o transition dado insere
+            'idcliente' => 100,
+            'nome' => 'aaa',
+            'apelido' => 'aaa',
+            'email' => 'aaa',
+            'data_nascimento'=> '1990-01-01',
+        ];
+        $db->table('loja')->insert($dados);
+
+        $dados = [//erro pois PK esta repetida
+            'idcliente' => 5,
+            'nome' => 'aaa',
+            'apelido' => 'aaa',
+            'email' => 'aaa',
+            'data_nascimento'=> '1990-01-01',
+        ];
+        $db->table('loja')->insert($dados);//não deixa salvar dados np banco
+
+        $db->transComplete();
+
+        if ($db->transStatus() == FALSE) {
+            echo 'Aconteceu um erro na query';
+        }
+        $db->close();
+    }
+
+    public function index56()
+    {
+        $db=db_connect();
+
+        if ($db->tableExists('loja')) {
+            echo 'Sim';
+        }else {
+            echo 'Não';
+        }
+
+        $resultados=$db->query("SELECT nome,apelido FROM loja");
+        $campos_tabela = $resultados->getFieldNames(); //busca campos da tabela (nome das colunas)
+        $this->printArray($campos_tabela);
+
+        //VIDEO 56 SOBRE METADADOS
+
+        $db->close();
+    }
+
+
+    public function index58()
+    {
+        //INTRODUÇÃO AOS MODELS
+
+        $cliente = new Clientes();
+        //$dados = $cliente->find(1); //mostrar dados de acordo com parametro
+        $dados = $cliente->findAll(); //mostrar todos os dados da tabela
+        $this->printArray($dados);
+
+        
+    }
+
+    public function index59()
+    {
+        $clientes = new Clientes();
+       /* $cliente = [
+            'nome' => 'NOVO',
+            'apelido' => 'NOVO APELIDO',
+            'email' => 'novo@email.com',
+        ];
+
+        $clientes->insert($cliente);
+        echo 'OK CADASTRADO';*/
+        
+       /*  $cliente = [
+            'nome' => 'aaa',
+            'apelido' => 'aaa',
+            'email' => 'aaa@email.com',
+        ];
+        $clientes->update(10,$cliente);
+
+        echo 'OK ATUALIZADO'; */
+
+        //FUNÇÃO FEITA POR MIM PARA INSERIR MODEL
+        //$this->inserir('Mariana','Lage','mariana@email.com','2006-07-08');
+
+        $clientes ->delete(11);
+        echo 'DELETADO';
+    }
+
+    public function inserir($nome,$apelido,$email,$dn)
+    {
+        $cliente = new Clientes();
+
+        $params = [
+            'nome' => $nome,
+            'apelido' => $apelido,
+            'email' => $email,
+            'data_nascimento' => $dn,
+            
+        ];
+        
+        /*INSERIR VARIOS DADOS
+        $dados = [
+            [
+                'nome' => ':nome:',
+                'apelido' => ':apleido:',
+                'email' => ':email:',
+                'data_nascimento' => ':dn:',
+            ],
+            [
+                'nome' => 'Ana',
+                'apelido' => 'Oliveira',
+                'email' => 'ana@email.com',
+                'data_nascimento' => '2002-04-06',
+            ],
+            [
+                'nome' => 'Mateus',
+                'apelido' => 'Oliveira',
+                'email' => 'mateus@email.com',
+                'data_nascimento' => '2009-08-21',
+            ],
+            [
+                'nome' => 'Andrea',
+                'apelido' => 'Oliveira',
+                'email' => 'andrea@email.com',
+                'data_nascimento' => '1974-11-30',
+            ],
+            [
+                'nome' => 'Andre',
+                'apelido' => 'Vitorino',
+                'email' => 'andre@email.com',
+                'data_nascimento' => '1974-12-31',
+            ],
+            [
+                'nome' => 'Pedro',
+                'apelido' => 'Lage',
+                'email' => 'pedro@email.com',
+                'data_nascimento' => '2001-04-21',
+            ] 
+        ];
+        
+        $cliente->insertBash($dados)*/ 
+
+        $cliente->insert($params);
+        echo 'INSERIDO';
+    }
 }
