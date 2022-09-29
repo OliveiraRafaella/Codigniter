@@ -485,10 +485,10 @@ class Main extends Controller //BaseController
 
         echo $cliente->nome;
         //echo $cliente->nome_completo; 
- */ 
+ */
         $db = db_connect();
         $tabela = $db->table('loja');
-        $dados = $tabela->getCustomResultObject(2,'Cliente');
+        $dados = $tabela->getCustomResultObject(2, 'Cliente');
 
         var_dump($dados);
         exit();
@@ -508,13 +508,13 @@ class Main extends Controller //BaseController
         $dados = $db->query("SELECT * FROM loja"); //->getResultObject();
         $db->close();
 
-       /*  echo '<pre>';
+        /*  echo '<pre>';
         print_r($dados->getFieldNames());//mostra as colunas da tabela retorna array */
 
         echo $db->table('loja')->countAll(); //conta quantos registros possui na tabela
         /*outro modo de fazer*/
         //echo count($dados);
-        
+
         /************ ERRO******************* */
         //$obj = new Cliente();
         //$obj -> nome_completo;
@@ -543,13 +543,13 @@ class Main extends Controller //BaseController
 
     private function printArray($d)
     {
-        if(is_array($d)){
+        if (is_array($d)) {
             echo '<pre>';
             print_r($d);
-        }else if (is_object($d)){
+        } else if (is_object($d)) {
             echo '<pre>';
             print_r($d);
-        }else {
+        } else {
             echo $d;
         }
     }
@@ -594,23 +594,23 @@ class Main extends Controller //BaseController
                 'nome' => 'nome2',
                 'apelido' => 'apelido2',
                 'email' => 'email2@email.com',
-                'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+                'data_nascimento' => DateTime::createFromFormat('Y-m-d', '1990-05-15')->format('Y-m-d')
             ],
             [
                 'nome' => 'nome3',
                 'apelido' => 'apelido3',
                 'email' => 'email3@email.com',
-                'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+                'data_nascimento' => DateTime::createFromFormat('Y-m-d', '1990-05-15')->format('Y-m-d')
             ],
             [
                 'nome' => 'nome4',
                 'apelido' => 'apelido4',
                 'email' => 'email4@email.com',
-                'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+                'data_nascimento' => DateTime::createFromFormat('Y-m-d', '1990-05-15')->format('Y-m-d')
             ]
         ];
         /*$db->table('loja')->insert($dados);*/ //insere apenas 1 registro
-        
+
         $db->table('loja')->insertBatch($dados); //insere apenas + de 1 registro
 
         $db->close();
@@ -624,11 +624,11 @@ class Main extends Controller //BaseController
             'nome' => 'NOME2',
             'apelido' => 'APELIDO2',
             'email' => 'EMAIL2@EMAIL.COM',
-            'data_nascimento' => DateTime::createFromFormat('Y-m-d','1990-05-15')->format('Y-m-d')
+            'data_nascimento' => DateTime::createFromFormat('Y-m-d', '1990-05-15')->format('Y-m-d')
         ];
 
-        $db->table('loja')->where('idcliente',8)->update($dados); //UPDATE
-        $db->table('loja')->where('idcliente',8)->delete(); //DELETE
+        $db->table('loja')->where('idcliente', 8)->update($dados); //UPDATE
+        $db->table('loja')->where('idcliente', 8)->delete(); //DELETE
         $db->close();
     }
 
@@ -637,24 +637,24 @@ class Main extends Controller //BaseController
         $db = db_connect();
 
         $db->transStart();
-        
-        $dados = [//sem o transition dado insere
+
+        $dados = [ //sem o transition dado insere
             'idcliente' => 100,
             'nome' => 'aaa',
             'apelido' => 'aaa',
             'email' => 'aaa',
-            'data_nascimento'=> '1990-01-01',
+            'data_nascimento' => '1990-01-01',
         ];
         $db->table('loja')->insert($dados);
 
-        $dados = [//erro pois PK esta repetida
+        $dados = [ //erro pois PK esta repetida
             'idcliente' => 5,
             'nome' => 'aaa',
             'apelido' => 'aaa',
             'email' => 'aaa',
-            'data_nascimento'=> '1990-01-01',
+            'data_nascimento' => '1990-01-01',
         ];
-        $db->table('loja')->insert($dados);//não deixa salvar dados np banco
+        $db->table('loja')->insert($dados); //não deixa salvar dados np banco
 
         $db->transComplete();
 
@@ -666,15 +666,15 @@ class Main extends Controller //BaseController
 
     public function index56()
     {
-        $db=db_connect();
+        $db = db_connect();
 
         if ($db->tableExists('loja')) {
             echo 'Sim';
-        }else {
+        } else {
             echo 'Não';
         }
 
-        $resultados=$db->query("SELECT nome,apelido FROM loja");
+        $resultados = $db->query("SELECT nome,apelido FROM loja");
         $campos_tabela = $resultados->getFieldNames(); //busca campos da tabela (nome das colunas)
         $this->printArray($campos_tabela);
 
@@ -692,14 +692,12 @@ class Main extends Controller //BaseController
         //$dados = $cliente->find(1); //mostrar dados de acordo com parametro
         $dados = $cliente->findAll(); //mostrar todos os dados da tabela
         $this->printArray($dados);
-
-        
     }
 
     public function index59()
     {
         $clientes = new Clientes();
-       /* $cliente = [
+        /* $cliente = [
             'nome' => 'NOVO',
             'apelido' => 'NOVO APELIDO',
             'email' => 'novo@email.com',
@@ -707,8 +705,8 @@ class Main extends Controller //BaseController
 
         $clientes->insert($cliente);
         echo 'OK CADASTRADO';*/
-        
-       /*  $cliente = [
+
+        /*  $cliente = [
             'nome' => 'aaa',
             'apelido' => 'aaa',
             'email' => 'aaa@email.com',
@@ -720,11 +718,11 @@ class Main extends Controller //BaseController
         //FUNÇÃO FEITA POR MIM PARA INSERIR MODEL
         //$this->inserir('Mariana','Lage','mariana@email.com','2006-07-08');
 
-        $clientes ->delete(11);
+        $clientes->delete(11);
         echo 'DELETADO';
     }
 
-    public function inserir($nome,$apelido,$email,$dn)
+    public function inserir($nome, $apelido, $email, $dn)
     {
         $cliente = new Clientes();
 
@@ -733,9 +731,9 @@ class Main extends Controller //BaseController
             'apelido' => $apelido,
             'email' => $email,
             'data_nascimento' => $dn,
-            
+
         ];
-        
+
         /*INSERIR VARIOS DADOS
         $dados = [
             [
@@ -776,9 +774,71 @@ class Main extends Controller //BaseController
             ] 
         ];
         
-        $cliente->insertBash($dados)*/ 
+        $cliente->insertBash($dados)*/
 
         $cliente->insert($params);
         echo 'INSERIDO';
+    }
+
+    public function index63()
+    {
+        $this->reset();
+    }
+
+    private function reset()
+    {
+        //numero de rows
+        $num_rows = 10;
+
+        $all = [];
+
+        for ($i = 1; $i <= $num_rows; $i++) {
+
+            $dob = new DateTime();
+            $dob->setDate(rand(1960, 1995), rand(1, 12), rand(1, 25));
+            $dob->setTime(0, 0, 0);
+            $new = [
+                'nome' => "Nome$i",
+                'apelido' => "Apelido$i",
+                'email' => "email$i",
+                'data_nascimento' => $dob->format('Y-m-d H:i:s')
+            ];
+
+            array_push($all, $new);
+        }
+
+        $this->printArray($all);
+        /*
+        criar o objeto no model
+        truncate da tabela
+        construir dados a inserir na bd
+        inserir os dados
+        */
+        $clientes = new Clientes();
+
+        //truncar a tabela
+        $clientes->query("TRUNCATE clientes");
+
+        //inserir todos os registros de all
+        $clientes->insertBatch($all);
+
+        echo 'inserido ' . "$num_rows registros";
+    }
+
+    public function index64()
+    {
+        $clientes = new Clientes();
+
+        $dados = [
+            'nome' => 'Joao',
+            'email' => 'eu@gmail.com'
+        ];
+
+        if ($clientes->save($dados) == false) {
+            echo 'Aconteceu um erro';
+            
+        }
+
+        echo '<p>Terminado';
     }
 }
