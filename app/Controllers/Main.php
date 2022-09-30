@@ -854,5 +854,49 @@ class Main extends Controller //BaseController
         $this->printArray($clientes->errors());
     }
 
-    
+    public function index68()
+    {
+        //FORGE
+
+        $forge = \Config\Database::forge();
+
+        //criar tabela na base de dados
+        //definir os campos
+        $campos = [
+            'idvenda' =>[
+                'type' => 'INT',
+                'unsigned' => true,
+                'auto_increment' => true
+            ],
+            'nome' =>[
+                'type' => 'VARCHAR',
+                'constraint' => 50
+            ],
+            'email' =>[
+                'type' => 'VARCHAR',
+                'constraint' => 100,
+                'default' => 'aaa'
+            ]
+        ];
+
+        //definir chave primaria
+        $forge->addPrimaryKey('idvenda');
+
+        //definir os campos ao forge
+        $forge->addField($campos);
+
+        //criar tabela
+        $forge->createTable('vendas',true);
+        echo 'OK - TABALE CRIADA';
+
+        //drop tabela
+        $forge->dropTable('vendas');
+        echo 'OK - DROP REALIZADO';
+        
+    }
+
+    public function index69()
+    {
+        //MIGRATIONS (MIGRAÇÕES)
+    }
 }
