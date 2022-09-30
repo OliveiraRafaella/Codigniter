@@ -897,6 +897,8 @@ class Main extends Controller //BaseController
 
     public function index69()
     {
-        //MIGRATIONS (MIGRAÇÕES)
+        //MIGRATIONS (MIGRAÇÕES) - alterar estruta da base
+        
     }
 }
+    //VIDEOS DE 70 A 73 SERVIDOR E PROJETO

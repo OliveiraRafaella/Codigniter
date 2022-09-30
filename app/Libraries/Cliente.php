@@ -1,6 +1,8 @@
 <?php namespace App\Libraries;
+use CodeIgniter\Libraries;
+use PharIo\Manifest\Library;
 
-class Cliente {
+class Cliente extends Library{
     public $nome;
 
     public function __construct()
