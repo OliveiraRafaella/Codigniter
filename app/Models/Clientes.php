@@ -16,6 +16,7 @@ class Clientes extends Model
     protected $validationRules    = [
         'nome'=> 'required|min_length[3]',
         'email'=> 'required|valid_email|is_unique[loja.email]'
+        //'email'=> 'required|valid_email|is_unique[loja.email, idcliente, 14]' //CRIAR EXCESSOES PARA A VALIDAÇÃO
     ];
     protected $validationMessages = [
         'nome' => [

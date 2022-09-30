@@ -841,4 +841,18 @@ class Main extends Controller //BaseController
 
         echo '<p>Terminado';
     }
+
+    public function index65()
+    {
+        $clientes = new Clientes();
+        $dados = [
+            'nome' => 'novo Nome1',
+            'email' => 'teste@test.com'
+        ];
+        $clientes->save($dados);
+
+        $this->printArray($clientes->errors());
+    }
+
+    
 }
